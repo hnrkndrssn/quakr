@@ -16,7 +16,8 @@ export default {
                 .build();
 
             connection.on('messageReceived', (username, text) => {
-                chatHub.$emit('message-received', {username, text});
+                const when = new Date();
+                chatHub.$emit('message-received', {username, text, when});
             });
 
             function start() {

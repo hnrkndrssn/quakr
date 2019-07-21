@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import axios from 'axios';
 import SuiVue from 'semantic-ui-vue';
+import Moment from 'vue-moment';
 
 import App from './views/App.vue';
 import router from './router';
@@ -13,6 +14,7 @@ axios.defaults.baseURL = 'https://localhost:5001';
 
 Vue.prototype.$http = axios;
 
+Vue.use(Moment);
 Vue.use(SuiVue);
 Vue.use(chatHub);
 
