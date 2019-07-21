@@ -21,7 +21,7 @@ namespace QuakR.Server
         {
             services.AddCors(options => {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder.WithOrigins("http://localhost:9000")
+                    builder => builder.WithOrigins("http://localhost:8080")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());
@@ -53,12 +53,9 @@ namespace QuakR.Server
 
             app.UseAuthorization();
 
-            app.UseSignalR(options => {
-                options.MapHub<ChatHub>("/chat");
-            });
-
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/chat");
                 endpoints.MapControllers();
             });
         }
