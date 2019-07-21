@@ -1,13 +1,18 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 
 namespace QuakR.Server.Hubs
 {
-    public class ChatHub : Hub
+    public interface IChatHub
     {
-        public async Task NewMessage(long username, string message)
+        Task MessageReceived(long username, string message);
+    }
+    public class ChatHub : Hub<IChatHub>
+    {
+        public async Task SendMessage(long username, string message)
         {
-            await Clients.All.SendAsync("messageReceived", username, message);
+            await Clients.All.MessageReceived(username, message);
         }
     }
 }
